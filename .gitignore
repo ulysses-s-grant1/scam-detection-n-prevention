@@ -1,3 +1,5 @@
 __pycache__/
 *.pyc
 .pytest_cache/
+# datasets are fetched via scripts/, not committed — see docs/data_sources.md
+data/
