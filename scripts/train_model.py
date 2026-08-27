@@ -6,13 +6,24 @@ from sklearn.metrics import accuracy_score
 
 df = pd.read_csv("data/spam_clean.csv")
 
+extra_examples = pd.DataFrame({
+    "message": [
+        "I won a prize at school competition",
+        "She won first prize in the science fair",
+        "Congrats on winning the prize at the game night",
+    ],
+    "label": ["ham", "ham", "ham"]
+})
+
+df = pd.concat([df, extra_examples], ignore_index=True)
+
 X = df["message"]
 Y = df["label"]
 
 X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
 
 
-vectorizer = CountVectorizer()
+vectorizer = CountVectorizer(ngram_range=(1, 2))
 X_train_vectors = vectorizer.fit_transform(X_train)
 X_test_vectors = vectorizer.transform(X_test)
 
