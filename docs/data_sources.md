@@ -5,3 +5,6 @@
 - **Original repository:** UCI Machine Learning Repository
 - **License/usage:** Published for spam research purposes. Terms for commercial use have not yet been reviewed — **revisit before any commercial release.**
 - **Fetched via:** `scripts/explore_data.py`, downloaded from a public GitHub mirror at project setup time — not committed to this repository.
+
+## Known scope limitation
+The SMS Spam Collection dataset labels all unwanted messages as "spam," which includes categories outside this project's actual focus (e.g. adult content solicitation, generic ad spam). SignalGuard's goal is specifically scam/fraud detection — deliberate manipulation tactics, not spam broadly. This overlap is a known limitation; the dataset has not been filtered by sub-category. Revisit if it causes the model to learn irrelevant patterns.
