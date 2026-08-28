@@ -77,3 +77,8 @@ results_df = pd.DataFrame({
 
 missed_spam = results_df[(results_df["actual"] == "spam") & (results_df["predicted"] == "ham")]
 print(missed_spam)
+
+import joblib
+
+joblib.dump(model, "models/spam_classifier.joblib")
+joblib.dump(vectorizer, "models/vectorizer.joblib")
