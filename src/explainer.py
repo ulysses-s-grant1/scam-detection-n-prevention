@@ -1,17 +1,24 @@
 def explain_results(results):
     explanation_parts = []
-    
-    for signal_name, matches in results.items():
+
+    for signal_name, matches in results["signals"].items():
         if matches:
             matches_text = ", ".join(matches)
-            
+
             if signal_name == "urgency":
                 line = f"""⚠️ Urgency Warning: We noticed phrases like "{matches_text}." Scammers love to use artificial time limits to make you panic so you'll hand over personal info without thinking. Take a deep breath, slow down, and verify who sent this before you click anything!"""
             elif signal_name == "reward":
                 line = f"""⚠️ Reward Alert: We noticed phrases like "{matches_text}." Scammers often promise unrealistic rewards to lure you in. Remember, if it sounds too good to be true, it probably is!"""
 
             explanation_parts.append(line)
-    
+
+    ml_result = results["ml"]
+    if ml_result["prediction"] == "spam":
+        explanation_parts.append(
+            f"🤖 Machine Learning Model: Our trained model also flags this message as likely spam, "
+            f"with {ml_result['confidence']:.2%} confidence, based on patterns learned from real scam and legitimate messages."
+        )
+
     if not explanation_parts:
         return "No obvious scam signals found, but stay cautious — scammers constantly adapt."
     else:
@@ -19,8 +26,8 @@ def explain_results(results):
 
 def calculate_risk_level(results):
     signal_count = 0
-    
-    for signal_name, matches in results.items():
+
+    for signal_name, matches in results["signals"].items():
         if matches:
             signal_count += 1
     
