@@ -1,11 +1,12 @@
 import joblib
+from pathlib import Path
 from detectors.urgency import detect_urgency
 from detectors.reward import detect_reward
 
-# load once when the module is imported, not every time analyze_message runs —
-# loading from disk is relatively slow, and nothing about the model changes between calls
-model = joblib.load("models/spam_classifier.joblib")
-vectorizer = joblib.load("models/vectorizer.joblib")
+BASE_DIR = Path(__file__).resolve().parent.parent
+model = joblib.load(BASE_DIR / "models" / "spam_classifier.joblib")
+vectorizer = joblib.load(BASE_DIR / "models" / "vectorizer.joblib")
+
 
 def analyze_message(message):
     signals = {
