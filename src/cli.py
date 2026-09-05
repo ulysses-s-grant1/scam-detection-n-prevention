@@ -2,7 +2,7 @@ from analyzer import analyze_message
 from explainer import calculate_risk_level, explain_results
 
 def main():
-    print("SignalGuard — paste a message to check it for scam signals. Type 'quit' to exit.\n")
+    print("Carespear — paste a message to check it for scam signals. Type 'quit' to exit.\n")
 
     while True:
         user_input = input("Message: ")
