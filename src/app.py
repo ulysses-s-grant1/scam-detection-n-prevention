@@ -26,7 +26,7 @@ def home():
         return render_template(
             "index.html",
             risk_level=risk["level"],
-            explanation=" ".join(explanations),
+            explanation=explanations,
             message=user_message,
         )
 
