@@ -2,7 +2,7 @@
 
 **An AI-powered scam detection tool that explains its reasoning instead of just flagging messages.**
 
-Most scam filters give a silent yes/no. Carespear scans messages for common manipulation patterns — urgency, false rewards, and more as coverage grows — and translates whatever it finds into plain-English warnings anyone can act on, because the moment someone is staring at a suspicious text is exactly when they need an explanation, not a black box.
+Carespear scans messages for common manipulation patterns — urgency, false rewards, and more as coverage grows — and translates whatever it finds into plain-English warnings anyone can act on, because the moment someone is staring at a suspicious text is exactly when they need an explanation, not a black box.
 
 > [!NOTE]
 > Core detection pipeline is working end-to-end (see below), including a trained ML classifier and a browser-based interface. This is currently a learning/research prototype, built milestone by milestone with tests at each stage.
