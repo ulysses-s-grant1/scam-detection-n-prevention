@@ -19,8 +19,9 @@ Carespear scans messages for common manipulation patterns — urgency, false rew
 | Automated tests | ✅ Working |
 | ML classifier (Naive Bayes) | ✅ Working |
 | Web interface (Flask) | ✅ Working |
-| Additional scam signals | 🔜 Planned |
-| URL analysis | 🔜 Planned |
+| Payment and credential signals | ✅ Working |
+| Additional scam signals | ✅ Working |
+| URL analysis | ✅ Working |
 | OCR / screenshot analysis | 🔜 Planned |
 
 ## Why This Project Exists
@@ -52,7 +53,7 @@ message text
      │
      ▼
 ┌──────────────┐
-│  Detectors    │  urgency.py, reward.py — scan for known manipulation phrases
+│  Detectors    │  urgency.py, reward.py, payment.py, credentials.py
 └──────┬───────┘
        ▼
 ┌──────────────┐
@@ -64,7 +65,7 @@ message text
 └──────┬───────┘
        ▼
 ┌────────────────────────┐
-│  Risk Scoring           │  categorizes overall risk: None / Low / Medium / High
+│  Risk Scoring           │  combines weighted signals + high-confidence ML output
 │  Explainer               │  turns raw signals into plain-English warnings
 └────────────────────────┘
        ▼
@@ -123,12 +124,12 @@ Signals identified from real-world scam pattern analysis, tracked in full detail
 |---|:---:|
 | Urgency / threat language | ✅ |
 | Reward / incentive language | ✅ |
-| Untraceable payment requests (gift cards, crypto, wire) | 🔜 |
-| Credential harvesting requests ("verify your login") | 🔜 |
-| Suspicious / lookalike links (typosquatting) | 🔜 |
-| Claimed-identity + urgent-ask combo | 🔜 |
-| Unsolicited "too good to be true" contact | 🔜 |
-| Romance/relationship manipulation | 🔬 Researched, not yet implemented |
+| Untraceable payment requests (gift cards, crypto, wire) | ✅ |
+| Credential harvesting requests ("verify your login") | ✅ |
+| Suspicious / lookalike links (typosquatting) | ✅ |
+| Claimed-identity + urgent-ask combo | ✅ |
+| Unsolicited "too good to be true" contact | ✅ heuristic |
+| Romance/relationship manipulation | ✅ conservative heuristic |
 
 ## Project Structure
 
@@ -143,7 +144,9 @@ src/
 └── detectors/
     ├── __init__.py
     ├── urgency.py
-    └── reward.py
+       ├── reward.py
+       ├── payment.py
+       └── credentials.py
 scripts/
 ├── explore_data.py            # dataset loading/cleaning
 └── train_model.py               # trains and saves the ML classifier
@@ -217,11 +220,13 @@ The ML training script (`train_model.py`) additionally includes its own regressi
 - [x] ML integrated into the main analysis pipeline
 - [x] Interactive CLI
 - [x] Web interface (Flask)
-- [ ] Remaining 5 signal detectors (payment requests, credential harvesting, lookalike links, identity+urgency combo, unsolicited contact)
-- [ ] Romance/relationship manipulation detector
-- [ ] URL / website analysis module
+- [x] Payment request detector
+- [x] Credential harvesting detector
+- [x] Remaining text signal detectors (lookalike links, identity+urgency combo, unsolicited contact)
+- [x] Romance/relationship manipulation detector
+- [x] URL extraction and suspicious-link analysis
 - [ ] Photo/screenshot upload support via OCR
-- [ ] Add CI checks and test/coverage reporting
+- [x] Add CI test checks
 
 ## License
 
